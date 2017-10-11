@@ -1,0 +1,2 @@
+# satire
+Detect satire
