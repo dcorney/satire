@@ -100,12 +100,15 @@ def build_model(X_train, X_test, y_train, y_test):
     return (classifier, df_out)
 
 
-if __name__ == "__main__":
-    random.seed(0)
+def train_test():
     train_docs = load_training_data()
     train_docs = enhance_docs(train_docs, boost_factor=2)
     X_train, X_test, y_train, y_test = train_test_split(train_docs)
-
     model, df_out = build_model(X_train, X_test, y_train, y_test)
     rep = metrics.classification_report(y_test, df_out['pred'])
     print(rep)
+
+
+if __name__ == "__main__":
+    random.seed(0)
+    train_test()
