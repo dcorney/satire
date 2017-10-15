@@ -49,6 +49,7 @@ def enhance_terms(text, boost_factor):
 
 
 def enhance_docs(docs, boost_factor):
+    LOGGER.info("Applying {}-boost enhancement to {} docs ".format(boost_factor, len(docs)))
     for d in docs:
         d['text'] = enhance_terms(d['text'], boost_factor=boost_factor)
         d['text'] = d['text'].lower()
@@ -69,7 +70,7 @@ def train_test_split(docs, ratio=0.8):
     X_test = [d['text'] for d in docs[split_point:]]
     y_train = [d['label'] for d in docs[0:split_point]]
     y_test = [d['label'] for d in docs[split_point:]]
-    LOGGER.info("Splitting data into {} training, {} testing docs".format(len(X_train),len(X_test)))
+    LOGGER.info("Splitting data into {} training, {} testing docs".format(len(X_train), len(X_test)))
     return ([X_train, X_test, y_train, y_test])
 
 
@@ -88,6 +89,7 @@ def build_model(X_train, X_test, y_train, y_test):
     model = svm.SVC(C=10, kernel='linear')
     # model = dummy.DummyClassifier(strategy="stratified")
     model.fit(X_train, y_train)
+    LOGGER.info("Model trained")
 
     # Test trained model:
     predicted = model.predict(X_test)
