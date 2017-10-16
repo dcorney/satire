@@ -44,7 +44,7 @@ def enhance_terms(text, boost_factor):
         if np.root.dep_ == "nsubj" and np.root.ent_type_ in ["PERSON", "ORG"]:
             to_boost.append(np.text)
             to_boost.append(np.root.head.text)
-    text = text + " ".join(to_boost * boost_factor)
+    text = text + " " + " ".join(to_boost * boost_factor)
     return text.lower()
 
 
